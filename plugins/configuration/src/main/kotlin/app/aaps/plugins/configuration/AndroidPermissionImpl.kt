@@ -197,11 +197,28 @@ class AndroidPermissionImpl @Inject constructor(
                 action = {
                     // Show alert dialog to the user saying a separate permission is needed
                     // Launch the settings activity if the user prefers
-                    val intent = Intent(
-                        Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                        ("package:" + activity.packageName).toUri()
-                    )
-                    activity.startActivity(intent)
+                    try {
+                        activity.startActivity(
+                            Intent(
+                                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                ("package:" + activity.packageName).toUri()
+                            )
+                        )
+                    } catch (_: Exception) {
+                        // OEM builds may not export the per-app overlay screen; try generic, then app details
+                        try {
+                            activity.startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION))
+                        } catch (_: Exception) {
+                            try {
+                                activity.startActivity(
+                                    Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                                        .setData("package:${activity.packageName}".toUri())
+                                )
+                            } catch (_: Exception) {
+                                ToastUtils.errorToast(activity, rh.gs(R.string.error_asking_for_permissions))
+                            }
+                        }
+                    }
                 },
                 validityCheck = { !Settings.canDrawOverlays(activity) }
             )

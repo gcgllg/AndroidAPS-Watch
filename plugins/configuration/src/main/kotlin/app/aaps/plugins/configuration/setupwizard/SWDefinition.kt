@@ -194,7 +194,16 @@ class SWDefinition @Inject constructor(
                 swButtonProvider.get()
                      .text(R.string.askforpermission)
                     .visibility { !Settings.canDrawOverlays(requireActivity()) }
-                    .action { requireActivity().startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, ("package:" + requireActivity().packageName).toUri())) })
+                    .action {
+                        try {
+                            requireActivity().startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, ("package:" + requireActivity().packageName).toUri()))
+                        } catch (_: Exception) {
+                            // OEM builds may not export the per-app overlay screen; fall back to app details
+                            try {
+                                requireActivity().startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).setData(("package:" + requireActivity().packageName).toUri()))
+                            } catch (_: Exception) { }
+                        }
+                    })
             .add(swBreakProvider.get())
             .add(swInfoTextProvider.get().label(rh.gs(R.string.need_whitelisting, rh.gs(config.appName))))
             .add(
