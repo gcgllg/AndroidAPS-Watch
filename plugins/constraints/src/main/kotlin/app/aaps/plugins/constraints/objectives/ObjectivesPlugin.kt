@@ -45,6 +45,17 @@ class ObjectivesPlugin @Inject constructor(
     aapsLogger, rh, preferences
 ), PluginConstraints, Objectives {
 
+    init {
+        // Patch (watch build): unlock all objectives by default so closed loop, SMB,
+        // autosens and automation gates are open without completing the learning goals.
+        for (objective in objectives) {
+            if (!objective.isAccomplished) {
+                if (!objective.isStarted) objective.startedOn = objective.dateUtil.now() - 1
+                objective.accomplishedOn = objective.dateUtil.now() - 1
+            }
+        }
+    }
+
     fun reset() {
         for (objective in objectives) {
             objective.startedOn = 0
