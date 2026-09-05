@@ -2,6 +2,7 @@ package app.aaps
 
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
@@ -112,6 +113,11 @@ class MainApp : DaggerApplication() {
     private var handler = Handler(HandlerThread(this::class.simpleName + "Handler").also { it.start() }.looper)
     private lateinit var refreshWidget: Runnable
     private val scope = CoroutineScope(Dispatchers.Default + Job())
+
+    override fun attachBaseContext(base: Context) {
+        // watch screen adaptation: per-app density override, system and other apps unaffected
+        super.attachBaseContext(app.aaps.core.ui.locale.UiScaleHelper.wrap(base))
+    }
 
     override fun onCreate() {
         super.onCreate()

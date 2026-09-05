@@ -40,16 +40,18 @@ object LocaleHelper {
     }
 
     fun wrap(ctx: Context): Context {
+        // watch screen adaptation first (density override), then locale
+        val scaledCtx = UiScaleHelper.wrap(ctx)
         // no action for system default language
-        if (selectedLanguage(ctx) == "default") return ctx
+        if (selectedLanguage(scaledCtx) == "default") return scaledCtx
 
-        val configuration = Configuration(ctx.resources.configuration)
-        val newLocale = currentLocale(ctx)
+        val configuration = Configuration(scaledCtx.resources.configuration)
+        val newLocale = currentLocale(scaledCtx)
         configuration.setLocale(newLocale)
         val localeList = LocaleList(newLocale)
         LocaleList.setDefault(localeList)
         configuration.setLocales(localeList)
-        val context = ctx.createConfigurationContext(configuration)
+        val context = scaledCtx.createConfigurationContext(configuration)
         return ContextWrapper(context)
     }
 }
