@@ -27,4 +27,18 @@
     <!-- SIB App -->
     <string name="sibionics">硅基（Sibionics）</string>
     <string name="description_source_sibionics">从硅基（Sibionics）应用接收血糖值</string>
+    <string name="ns_client_bg">NSClient 血糖</string>
+    <string name="ns_client_bg_short">NS 血糖</string>
+    <string name="source_xdrip">xDrip+ 血糖</string>
+    <string name="description_source_xdrip">从 xDrip+ 及兼容应用（Juggluco 等）接收血糖值。</string>
+    <string name="description_source_intelligo">从 Intelligo 应用接收数值</string>
+    <string name="random_bg">随机血糖</string>
+    <string name="description_source_random_bg">生成随机血糖数据（仅演示模式）</string>
+    <string name="bgsource_settings">血糖源设置</string>
+    <string name="bgsource_log_sensor_change_title">接受传感器启动</string>
+    <string name="bgsource_log_sensor_change_summary">从血糖源本地广播收到传感器启动事件时，自动在护理门户创建「置入 CGM 传感器」事件</string>
+    <string name="direction">方向</string>
+    <string name="bg_generation_interval_minutes">血糖生成间隔（分钟）</string>
+    <string name="syai_tag_app">Syai</string>
+    <string name="description_source_patched_syai_tag_app">从 Syai/Ottai 应用接收血糖数据。</string>
 </resources>

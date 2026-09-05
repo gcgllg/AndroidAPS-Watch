@@ -114,4 +114,5 @@
     <string name="num2pin">2: (8位数字)</string>
     <string name="basal_bolus_step">基础率/大剂量步进</string>
     <string name="carbs_store_error">碳水可能没有正确存储。如果需要，请手动检查并再次存储。</string>
+    <string name="danar_useextended_title">大于 200% 时使用延长大剂量</string>
 </resources>

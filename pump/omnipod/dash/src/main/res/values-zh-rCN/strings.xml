@@ -33,4 +33,20 @@
     <string name="omnipod_dash_not_enough_insulin">储药器中的胰岛素不足</string>
     <string name="unconfirmed_command" comment="26 characters max for translation">未确认命令</string>
     <string name="requested_by_user" comment="26 characters max for translation">用户请求</string>
+    <string name="omnipod_dash_history_item_amount">剂量</string>
+    <string name="omnipod_common_history_tbr_value">%1$.2f U/h，%2$d 分钟</string>
+    <string name="omnipod_common_history_total_delivered">累计输注: %1$.2f U</string>
+    <string name="profile_set_ok">基础率配置设置成功</string>
+    <string name="suspend_delivery_is_unconfirmed">暂停输注未确认！请在 Omnipod 页手动刷新贴片状态，必要时恢复输注。</string>
+    <string name="insulin_delivery_suspended">胰岛素输注已暂停</string>
+    <string name="timezone_on_pod_is_different_from_the_timezone">贴片时区与手机时区不一致，基础率不正确。请切换配置文件以修复</string>
+    <string name="failed_to_set_the_new_basal_profile">设置新基础率配置失败。输注已暂停</string>
+    <string name="setting_basal_profile_might_have_failed">基础率配置可能设置失败，输注可能已暂停！请在 Omnipod 页手动刷新贴片状态，必要时恢复输注。</string>
+    <string name="bolus_delivery_status_uncertain">大剂量输注状态不确定。请刷新贴片状态以确认或否认。</string>
+    <string name="temp_basal_out_of_sync">临时基础率状态与预期不符！如之前有临时基础率在运行，它已被取消。请核对已输注胰岛素和贴片历史</string>
+    <string name="checking_delivery_status">正在检查输注状态</string>
+    <string name="setting_temp_basal_might_have_basal_failed">临时基础率可能设置失败。如之前有临时基础率在运行，它已被取消。请在 Omnipod 页手动刷新贴片状态。</string>
+    <string name="cancel_temp_basal_result_is_uncertain">取消临时基础率的结果不确定</string>
+    <string name="unconfirmed_resumedelivery_command_please_refresh_pod_status">恢复输注指令未确认。请刷新贴片状态</string>
+    <string name="cancelling_temp_basal_might_have_failed">取消临时基础率可能失败。如之前有临时基础率在运行，它可能已被取消。请在 Omnipod 页手动刷新贴片状态。</string>
 </resources>

@@ -114,4 +114,37 @@
     <string name="autotune_run_cancelled">检测到另一次自动调试运行，本次运行已取消</string>
     <!--    Steps count-->
     <!--    SMB mode-->
+    <string name="exportsettings_message">设置导出: %1$s</string>
+    <string name="export_settings_short">治疗记录中的文字:</string>
+    <string name="choose_from_map">从地图选择</string>
+    <string name="triggerHeartRate">心率</string>
+    <string name="triggerHeartRateDesc">心率 %1$s %2$.0f</string>
+    <string name="triggerSensorAgeLabel">传感器年龄</string>
+    <string name="triggerSensorAgeDesc">传感器已用 %1$s %2$.1f 小时</string>
+    <string name="triggerCannulaAgeLabel">管路年龄</string>
+    <string name="triggerCannulaAgeDesc">管路已用 %1$s %2$.1f 小时</string>
+    <string name="triggerPodChangeLabel">贴片激活</string>
+    <string name="triggerPodChangeDesc">贴片已激活</string>
+    <string name="triggerInsulinAgeLabel">胰岛素年龄</string>
+    <string name="triggerInsulinAgeDesc">胰岛素已用 %1$s %2$.1f 小时</string>
+    <string name="triggerPumpBatteryAgeLabel">泵电池年龄</string>
+    <string name="triggerPumpBatteryAgeDesc">泵电池已用 %1$s %2$.1f 小时</string>
+    <string name="triggerReservoirLevelLabel">储药量</string>
+    <string name="triggerReservoirLevelDesc">储药量 %1$s %2$.0f</string>
+    <string name="triggerPumpBatteryLevelLabel">泵电量</string>
+    <string name="triggerPumpBatteryLevelDesc">泵电量 %1$s %2$.0f</string>
+    <string name="stop_processing">停止处理</string>
+    <string name="time_to_eat">到时间进食了！
+重新运行大剂量向导进行计算。</string>
+    <string name="error_setting_reminder">设置未来闹钟时出错</string>
+    <string name="autotune_profile_name">Autotune 配置 %1$s</string>
+    <string name="autotune_run_without_autoswitch">Autotune 运行时未切换配置</string>
+    <string name="triggerStepsCountLabel">步数</string>
+    <string name="triggerStepsCountDesc">每 %1$s 分钟步数 %2$s %3$.0f</string>
+    <string name="triggerStepsCountDropdownLabel">统计时长</string>
+    <string name="changeSmbState">启用/停用 SMB</string>
+    <string name="changeSmbTo">将 SMB 切换为 %1$s</string>
+    <string name="newSmbMode">新 SMB 模式:</string>
+    <string name="on">开</string>
+    <string name="off">关</string>
 </resources>

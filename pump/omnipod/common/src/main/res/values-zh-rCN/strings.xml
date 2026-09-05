@@ -174,4 +174,14 @@
     <plurals name="omnipod_common_pod_alerts">
         <item quantity="other">Pod 提醒: %1$s</item>
     </plurals>
+    <string name="omnipod_common_uncertain">不确定</string>
+    <string name="omnipod_common_preferences_expiration_reminder_enabled_summary">启用后，贴片到达指定时间会蜂鸣提醒</string>
+    <string name="omnipod_common_preferences_expiration_reminder_hours_before_expiry">到期前提醒（小时）（72 小时）</string>
+    <string name="omnipod_common_preferences_expiration_alarm_enabled">到期警报已启用</string>
+    <string name="omnipod_common_preferences_expiration_alarm_enabled_summary">启用后，贴片到达指定时间及关机前 1 小时会蜂鸣</string>
+    <string name="omnipod_common_preferences_expiration_alarm_hours_before_shutdown">关机前警报（小时）（80 小时）</string>
+    <string name="omnipod_common_preferences_notification_uncertain_smb_sound_enabled">不确定 SMB 通知提示音已启用</string>
+    <string name="omnipod_dash_use_bonding">在 Android 15 上绑定蓝牙设备</string>
+    <string name="omnipod_common_pod_status_normal">正常</string>
+    <string name="omnipod_common_disable_suspend_alerts">停用暂停警报</string>
 </resources>

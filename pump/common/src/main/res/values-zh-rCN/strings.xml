@@ -58,4 +58,23 @@
     <plurals name="daysago">
         <item quantity="other">%1$d 天前</item>
     </plurals>
+    <string name="pump_cmd_desc_get_settings">读取设置</string>
+    <string name="pump_cmd_desc_get_firmware">读取泵固件</string>
+    <string name="pump_cmd_desc_get_basal_profile">读取基础率配置</string>
+    <string name="pump_cmd_desc_set_basal_profile">写入基础率配置</string>
+    <string name="pump_cmd_desc_get_tbr">读取临时基础率</string>
+    <string name="pump_cmd_desc_cancel_tbr">取消临时基础率</string>
+    <string name="pump_cmd_desc_set_tbr">设置临时基础率</string>
+    <string name="pump_cmd_desc_set_bolus">设置大剂量</string>
+    <string name="pump_cmd_desc_get_bolus">读取大剂量</string>
+    <string name="pump_cmd_desc_cancel_bolus">取消大剂量</string>
+    <string name="pump_cmd_desc_get_remaining_insulin">读取剩余胰岛素</string>
+    <string name="pump_cmd_desc_get_battery_status">读取电池状态</string>
+    <string name="pump_cmd_desc_get_time">读取时间</string>
+    <string name="pump_cmd_desc_set_time">设置时间</string>
+    <string name="pump_cmd_desc_get_pump_status">读取泵状态</string>
+    <string name="pump_cmd_desc_get_history">读取历史记录</string>
+    <string name="pump_cmd_desc_get_history_params">读取历史 %s</string>
+    <string name="pump_cmd_desc_custom">自定义指令</string>
+    <string name="time_last_24_hours">最近 24 小时</string>
 </resources>

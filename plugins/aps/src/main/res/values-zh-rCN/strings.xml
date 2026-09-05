@@ -133,4 +133,119 @@
     <string name="autotune_revert_local_profile_message">使用输入配置文件还原 %1$s 配置文件？</string>
     <string name="autotune_profile_invalid">配置文件无效</string>
     <!--    autoISF -->
+    <string name="dynisf_adjust_sensitivity">启用基于 TDD 的敏感度比来调整基础率与血糖目标</string>
+    <string name="dynisf_adjust_sensitivity_summary">使用最近 24 小时 TDD / 7 天 TDD 计算敏感度比，用于增减基础率；若启用相关选项，也会像自动敏感度一样调整血糖目标。建议先关闭此选项</string>
+    <string name="dyn_isf_adjust_title">动态 ISF 调整系数 %</string>
+    <string name="dyn_isf_adjust_summary">动态 ISF 的调整系数。设为 100% 以上则纠正剂量更激进，低于 100% 则更保守。</string>
+    <string name="openaps_auto_isf">Auto ISF</string>
+    <string name="description_auto_isf">面向高级用户的最新算法，带 AutoISF 扩展</string>
+    <string name="enable_smb_always_summary">始终启用 SMB，不依赖 COB、临时目标或大剂量。仅支持具备高级数据过滤的血糖源</string>
+    <string name="enable_smb_after_carbs_summary">进食后 6 小时内启用 SMB，即使 COB 为 0。仅支持具备高级数据过滤的血糖源</string>
+    <string name="lgs_threshold_summary">血糖低于该值时暂停胰岛素。默认值使用标准目标模型。可设置在 60mg/dl(3.3mmol/l) 至 100mg/dl(5.5mmol/l) 之间。低于 65/3.6 的值将使用默认模型</string>
+    <string name="use_dynamic_sensitivity_title">启用动态敏感度</string>
+    <string name="use_dynamic_sensitivity_summary">让算法使用动态敏感度而非配置文件中的值</string>
+    <string name="insulin_peak">峰值</string>
+    <string name="run_now">立即运行</string>
+    <string name="pump_not_initialized">泵未初始化！</string>
+    <string name="no_aps_selected">未选择 APS 或无可用结果</string>
+    <string name="carbs_suggestion">补糖建议</string>
+    <string name="open_loop_new_suggestion">有新建议可用</string>
+    <string name="last_run_label">上次运行</string>
+    <string name="request_label">请求</string>
+    <string name="loop_constraints_processed_label">处理限制之后</string>
+    <string name="loop_tbr_request_time_label">临时基础率请求时间</string>
+    <string name="loop_tbr_execution_time_label">临时基础率执行时间</string>
+    <string name="loop_tbr_set_by_pump_label">泵设置的临时基础率</string>
+    <string name="loop_smb_request_time_label">SMB 请求时间</string>
+    <string name="loop_smb_execution_time_label">SMB 执行时间</string>
+    <string name="loop_smb_set_by_pump_label">泵设置的 SMB</string>
+    <string name="loop_open_mode_min_change">最小请求变化 [%]</string>
+    <string name="loop_open_mode_min_change_summary">开放闭环仅当变化幅度超过该百分比时才弹出新请求。默认 20%</string>
+    <string name="fallback_smb_no_tdd">回退到 SMB。TDD 数据不足。</string>
+    <string name="fallback_to_isf_no_tdd">回退到配置文件敏感度。数据不足。原因: %1$s</string>
+    <string name="autotune_description">辅助调整配置文件（ISF、糖比、基础率）</string>
+    <string name="not_available_full">不可用</string>
+    <string name="pump_disconnected">泵已断开</string>
+    <string name="half_basal_exercise_target_title">半基础率运动目标</string>
+    <string name="half_basal_exercise_target_summary">设为一个数值，如 160：当临时目标为 160 mg/dL 且「高目标提高敏感度=开启」时，在该水平运行 50%% 基础率（120=75%%；140=60%%）。</string>
+    <string name="autoISF_settings_title">AutoISF 设置</string>
+    <string name="autoISF_settings_summary">AutoISF 允许在多种血糖变化场景下自适应调整胰岛素敏感度（ISF）
+
+也可调整 SMB 输送设置</string>
+    <string name="smb_delivery_settings_title">SMB 输送设置</string>
+    <string name="smb_delivery_settings_summary">用于在 ISF 被增强（即 ISF 数值较低）的情况下增大实际可输送 SMB 量的选项集合。
+
+请谨慎使用</string>
+    <string name="openapsama_enable_autoISF">启用基于血糖行为的 ISF 自适应</string>
+    <string name="openapsama_autoISF_max_summary">类似 autosens_max，定义 ISF 最强可到什么程度。
+
+默认值 1.0 等于关闭该效果。
+
+警告: 使用 2.5 以上的值务必极其小心</string>
+    <string name="openapsama_autoISF_min_summary">类似 autosens_min，定义 ISF 最弱可到什么程度。
+
+默认值 1.0 等于关闭该效果。</string>
+    <string name="openapsama_dura_ISF_weight_summary">应用于持续时间较长的高血糖平台期的权重，会增强 ISF 从而可能增加胰岛素输送。
+
+默认值 0.0 等于关闭该效果。</string>
+    <string name="openapsama_lower_ISFrange_weight_summary">血糖低于目标时应用的权重，会削弱 ISF 从而可能减少胰岛素输送。
+
+默认值 0.0 等于关闭该效果。</string>
+    <string name="openapsama_higher_ISFrange_weight_summary">血糖高于目标时应用的权重，会增强 ISF 从而可能增加胰岛素输送。
+
+默认值 0.0 等于关闭该效果。</string>
+    <string name="openapsama_pp_ISF_weight_summary">血糖上升时应用的权重，会增强 ISF 从而可能增加胰岛素输送。
+
+默认值 0.0 等于关闭该效果。</string>
+    <string name="openapsama_bgAccel_ISF_weight_summary">血糖加速上升时应用的权重，会增强 ISF 从而可能增加胰岛素输送。
+
+默认值 0.0 等于关闭该效果。</string>
+    <string name="openapsama_bgBrake_ISF_weight_summary">血糖减速下降时应用的权重，会削弱 ISF 从而可能减少胰岛素输送。
+
+默认值 0.0 等于关闭该效果。</string>
+    <string name="openapsama_autoISF_max">autoISF 最大比率
+(autoISF_max)</string>
+    <string name="openapsama_autoISF_min">autoISF 最小比率
+(autoISF_min)</string>
+    <string name="openapsama_lower_ISFrange_weight">低血糖区间 ISF 权重
+(lower_ISFrange_weight)</string>
+    <string name="openapsama_higher_ISFrange_weight">高血糖区间 ISF 权重
+(higher_ISFrange_weight)</string>
+    <string name="openapsama_pp_ISF_weight">餐后 ISF 权重
+(pp_ISF_weight)</string>
+    <string name="openapsama_bgAccel_ISF_weight">血糖加速时权重
+(bgAccel_ISF_weight)</string>
+    <string name="openapsama_bgBrake_ISF_weight">血糖减速时权重
+(bgBrake_ISF_weight)</string>
+    <string name="openapsama_dura_ISF_weight">持续高血糖 ISF 权重
+(dura_ISF_weight)</string>
+    <string name="openapsama_smb_delivery_ratio">固定 SMB 输送比
+(smb_delivery_ratio)</string>
+    <string name="openapsama_smb_delivery_ratio_min">可变 SMB 输送比下限
+(smb_delivery_ratio_min)</string>
+    <string name="openapsama_smb_delivery_ratio_max">可变 SMB 输送比上限
+(smb_delivery_ratio_max)</string>
+    <string name="openapsama_smb_delivery_ratio_bg_range">可变 SMB 输送比映射血糖区间
+(smb_delivery_ratio_bg_range)</string>
+    <string name="openapsama_smb_max_range_extension">SMB/UAM 最大范围扩展
+(smb_max_range_extension)</string>
+    <string name="openapsama_smb_delivery_ratio_summary">默认值 0.5。这是 OpenAPS 的又一个安全上限，指定总需求胰岛素中可以以 SMB 方式输送的比例，防止照护者手机同时下发的 SMB 请求造成危险。请缓慢谨慎地增大该实验性数值。</string>
+    <string name="openapsama_smb_delivery_ratio_min_summary">默认值 0.5。这是线性递增输送比的下限（替代上面的固定值）。</string>
+    <string name="openapsama_smb_delivery_ratio_max_summary">默认值 0.5。这是线性递增输送比的上限（替代上面的固定值）。</string>
+    <string name="openapsama_smb_delivery_ratio_bg_range_summary">默认值 0。线性递增的 SMB 输送比映射到血糖区间 [目标血糖, 目标血糖+区间]。
+在目标血糖处输送比为 smb_delivery_ratio_min，在目标血糖+区间处为 smb_delivery_ratio_max。
+设为 0 时禁用线性递增输送比，使用固定的 smb_delivery_ratio。</string>
+    <string name="openapsama_smb_max_range_extension_summary">默认值 1。这是 OpenAPS 的又一个安全上限，指定可超过常规 120 分钟 maxSMB/maxUAM 限制的倍数。请缓慢谨慎地增大该实验性数值。</string>
+    <string name="enableSMB_EvenOn_OddOff_always">按活动目标奇偶交替启用 SMB</string>
+    <string name="enableSMB_EvenOn_OddOff_always_summary">
+启用后…
+若活动目标(mmol/L)小数为偶数
+或活动目标(mg/dL)为偶数则启用
+
+否则停用</string>
+    <string name="openapsama_iob_threshold_percent_summary">maxIOB 超过该百分比时禁用 SMB。
+默认值 100%%。
+设为 100% 等于停用该功能。</string>
+    <string name="openapsama_iob_threshold_percent">SMB 的 maxIOB 阈值百分比
+(iob_threshold_percent)</string>
 </resources>

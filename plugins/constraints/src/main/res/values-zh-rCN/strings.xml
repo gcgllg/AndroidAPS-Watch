@@ -26,4 +26,33 @@
     <string name="objectives_shortname">目标</string>
     <string name="description_objectives">学习计划</string>
     <string name="doyouwantresetstart">你想要重置已启动的目标? 你会失去已有的进度。</string>
+    <string name="dst_plugin_name">夏令时</string>
+    <string name="dst_in_24h_warning">24 小时内将发生夏令时切换</string>
+    <string name="dst_loop_disabled_warning">夏令时切换发生在 3 小时内 - 闭环已停用</string>
+    <string name="dst_loop_disabled_error">夏令时切换发生在 3 小时内。闭环已临时停用，将在切换 3 小时后自动恢复</string>
+    <string name="storage">存储限制</string>
+    <string name="disk_full">内部存储至少需释放 %1$d MB！闭环已停用！</string>
+    <string name="application_expired">应用已过期</string>
+    <string name="running_invalid_version">检测到正在运行无效版本。闭环已停用！</string>
+    <string name="versionavailable">新版本 %1$s 可用</string>
+    <string name="version_expire">版本 %1$s 将于 %2$s 过期并转为 LGS 模式</string>
+    <string name="bg_quality">血糖质量</string>
+    <string name="recalculated_data_used">使用了重算数据</string>
+    <string name="bg_too_close">血糖过于接近:
+%1$s
+%2$s</string>
+    <string name="a11y_bg_quality_recalculated">已重算</string>
+    <string name="a11y_bg_quality_doubles">重复条目</string>
+    <string name="a11y_bg_quality_flat">平坦数据，视为异常</string>
+    <string name="limitingextendedbolus">因 %2$s，延长大剂量被限制为 %1$.1fU</string>
+    <string name="completed_well_done">已完成，干得漂亮！</string>
+    <string name="synchaswritepermission">同步服务具有写入权限</string>
+    <string name="objectives_next_button">下一个</string>
+    <string name="objectives_previous_button">上一个</string>
+    <string name="objectives_button_unfinish">重置完成状态</string>
+    <string name="objectives_button_unstart">重置开始状态</string>
+    <string name="phone_checker">手机检查</string>
+    <string name="version_checker">版本检查</string>
+    <string name="signature_verifier">签名校验</string>
+    <string name="safety">安全</string>
 </resources>

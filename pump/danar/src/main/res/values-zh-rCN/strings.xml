@@ -1,2 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>    <string name="unsupported_action_in_pump">泵不支持该操作。请只使用 AAPS 界面操作！</string>
+    <string name="waiting_1_minute">等待 %1$d/%2$d 秒后重试连接</string>
+</resources>

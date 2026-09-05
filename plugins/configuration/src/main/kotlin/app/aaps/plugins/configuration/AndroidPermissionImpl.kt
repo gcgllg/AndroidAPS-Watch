@@ -66,6 +66,18 @@ class AndroidPermissionImpl @Inject constructor(
             } catch (_: ActivityNotFoundException) {
                 permissionBatteryOptimizationFailed = true
                 OKDialog.show(activity, rh.gs(R.string.permission), rh.gs(R.string.alert_dialog_permission_battery_optimization_failed)) { activity.recreate() }
+            } catch (_: SecurityException) {
+                // Some OEM builds (e.g. ColorOS Watch) do not export the battery optimization
+                // request screen. Fall back to the app details page where the user can
+                // disable battery optimization manually.
+                try {
+                    activity.startActivity(
+                        Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                            .setData("package:${activity.packageName}".toUri())
+                    )
+                } catch (_: Exception) {
+                    ToastUtils.errorToast(activity, rh.gs(R.string.error_asking_for_permissions))
+                }
             }
         }
     }
