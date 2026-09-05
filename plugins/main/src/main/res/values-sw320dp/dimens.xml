@@ -1,0 +1,6 @@
+<resources>
+    <!-- 手机档（sw≥320dp）：恢复默认尺寸，与 values/dimens.xml 保持一致，用于抵消 values-sw180dp 的手表档 -->
+    <dimen name="overview_bg_text_size">60sp</dimen>
+    <dimen name="overview_time_text_size">25sp</dimen>
+    <dimen name="overview_time_ago_short_text_size">19sp</dimen>
+</resources>

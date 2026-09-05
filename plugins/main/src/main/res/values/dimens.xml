@@ -1,0 +1,6 @@
+<resources>
+    <!-- 抽取自 overview 布局的硬编码尺寸（默认值与原硬编码一致，手机端行为不变） -->
+    <dimen name="overview_bg_text_size">60sp</dimen>
+    <dimen name="overview_time_text_size">25sp</dimen>
+    <dimen name="overview_time_ago_short_text_size">19sp</dimen>
+</resources>

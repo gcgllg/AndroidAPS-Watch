@@ -1,0 +1,6 @@
+<resources>
+    <!-- 手表窄屏档：仅在最小宽度 <320dp 的设备生效（本表 320dpi 下 sw≈189dp 命中；手机 ≥320dp 走 values-sw320dp 恢复默认） -->
+    <dimen name="overview_bg_text_size">34sp</dimen>
+    <dimen name="overview_time_text_size">15sp</dimen>
+    <dimen name="overview_time_ago_short_text_size">12sp</dimen>
+</resources>

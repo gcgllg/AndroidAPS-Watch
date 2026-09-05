@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nav_preferences_plugin">%1$s 首选项</string>
+    <string name="nav_exit">退出</string>
+    <string name="delta">增量</string>
+    <string name="save">保存</string>
+    <string name="wear">手表</string>
+    <string name="nav_about">关于</string>
+    <string name="sensitivity_warning">如果要打开 Autosense功能, 记住输入所有吃的碳水化合物。否则碳水化合物的偏差将被识别为错误的灵敏度变化!!</string>
+    <string name="invalid">无效</string>
+    <string name="gradually_increase_notification_volume">逐渐增加警报和通知的音量</string>
+    <string name="localalertsettings_title">本地警报</string>
+    <string name="enable_missed_bg_readings_alert">如果未收到血糖数据, 则发出警报</string>
+    <string name="enable_pump_unreachable_alert">如果无法连接泵, 则发出警报</string>
+    <string name="pump_unreachable_threshold">泵无法连接的时间阈值[min]</string>
+    <string name="enable_carbs_req_alert">当需要碳水化合物时发出提醒</string>
+    <string name="open_navigation">打开导航栏</string>
+    <string name="close_navigation">关闭导航栏</string>
+    <string name="remove_items">删除项目</string>
+    <string name="sort_items">项目排序</string>
+    <string name="unitsnosemicolon">单位</string>
+    <string name="authorizationfailed">授权失败</string>
+    <string name="cannula">输注导管</string>
+    <string name="identification_not_set">开发模式下未设置身份识别联系方式</string>
+    <!-- WEAR OS-->
+    <string name="remove_selected_items">删除选中项？</string>
+    <string name="count_selected">已选中 %1$d</string>
+    <string name="sort_label">排序</string>
+    <string name="dialog_canceled">对话框已取消</string>
+    <string name="veryLow" comment="below 3.1">非常低</string>
+    <string name="low" comment="3.1-3.9">低</string>
+    <string name="high" comment="10.0-13.9">高</string>
+    <string name="veryHigh" comment="above 13.9">非常高</string>
+    <string name="below" comment="below &quot;in range&quot;">底部</string>
+    <string name="in_range">在范围内</string>
+    <string name="above" comment="above &quot;in range&quot;">上方</string>
+    <string name="show_loop_records">显示闭环记录</string>
+    <string name="show_hide_records">隐藏闭环记录</string>
+    <string name="widget_description">AndroidAPS小部件</string>
+    <string name="configure">配置透明度</string>
+    <string name="loop_status">闭环状态</string>
+    <string name="graph_scale">图形缩放</string>
+    <string name="profile1">配置文件 1</string>
+    <string name="profile2">配置文件 2</string>
+    <string name="login">登录</string>
+    <string name="remove_all">删除全部</string>
+    <string name="a11y_otp_qr_code">用于安装一次性随机验证码的二维码</string>
+    <string name="a11y_open_settings">打开设置</string>
+    <string name="a11y_set_carb_timer">设置碳水计时器提醒</string>
+    <string name="device_all">全部</string>
+    <string name="device_phone">手机</string>
+    <string name="device_watch">手表</string>
+    <string name="a11y_only_on_watch">仅在手表时</string>
+    <string name="a11y_only_on_phone">仅在手机上</string>
+    <string name="a11y_drag_and_drop_handle">拖放操作</string>
+    <string name="about_plugin">微信公众号/抖音: 一型码农Lex</string>
+    <string name="default_lang">系统默认</string>
+    <string name="language">语言</string>
+    <string name="search">搜索</string>
+    <string name="simple_mode">简易模式</string>
+    <string name="select">选择</string>
+    <string name="set">设置</string>
+</resources>
