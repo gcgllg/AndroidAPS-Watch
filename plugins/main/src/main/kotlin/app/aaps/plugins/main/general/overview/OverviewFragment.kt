@@ -280,7 +280,9 @@ class OverviewFragment : DaggerFragment(), View.OnClickListener, OnLongClickList
         // Only apply on small (watch) layouts; phone screens are tall enough to coexist.
         if (!smallHeight) return
         if (!isAdded) return
-        val target = if (dialogOpen && anyDialogVisible()) View.GONE else View.VISIBLE
+        // Trust the started/stopped event pair: simpler and avoids a race
+        // where anyDialogVisible() may miss a fragment still in attaching state.
+        val target = if (dialogOpen) View.GONE else View.VISIBLE
         binding.buttonsLayout.root.visibility = target
     }
 
