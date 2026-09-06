@@ -278,10 +278,14 @@ class OverviewFragment : DaggerFragment(), View.OnClickListener, OnLongClickList
 
     private fun updateOverviewButtonsForDialog(dialogOpen: Boolean) {
         // Only apply on small (watch) layouts; phone screens are tall enough to coexist.
-        if (!smallHeight) return
+        // Use dp-based layout detection (Configuration.screenHeightDp,
+        // smallestScreenWidthDp, densityDpi) instead of relying on smallHeight which is
+        // set as screenHeight(pixels) <= Constants.SMALL_HEIGHT(480dp) -- false on
+        // 496px-tall watches such as OPPO Watch 3 Pro.
         if (!isAdded) return
-        // Trust the started/stopped event pair: simpler and avoids a race
-        // where anyDialogVisible() may miss a fragment still in attaching state.
+        val cfg = resources.configuration
+        val isWatchLayout = cfg.smallestScreenWidthDp <= 360 || resources.displayMetrics.densityDpi >= 280 || cfg.screenHeightDp <= 480
+        if (!isWatchLayout) return
         val target = if (dialogOpen) View.GONE else View.VISIBLE
         binding.buttonsLayout.root.visibility = target
     }
