@@ -48,10 +48,21 @@ abstract class DialogFragmentWithDate : DaggerDialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog?.window?.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+        // Watch: fill the whole screen height so tall edit dialogs keep
+        // their OK/Cancel buttons visible without scrolling and without
+        // leaving a transparent strip at the bottom of the screen.
+        val isWatchLayout = resources.configuration.smallestScreenWidthDp <= 360
+        if (isWatchLayout) {
+            dialog?.window?.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+        } else {
+            dialog?.window?.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+        }
         aapsLogger.debug(LTag.UI, "Dialog opened: ${this.javaClass.simpleName}")
     }
 
