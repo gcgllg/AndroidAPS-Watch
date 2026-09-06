@@ -26,6 +26,7 @@ import app.aaps.core.interfaces.utils.DateUtil
 import app.aaps.core.interfaces.utils.DecimalFormatter
 import app.aaps.core.interfaces.utils.HardLimits
 import app.aaps.core.keys.LongNonKey
+import app.aaps.core.keys.StringKey
 import app.aaps.core.keys.interfaces.Preferences
 import app.aaps.core.objects.extensions.blockFromJsonArray
 import app.aaps.core.objects.extensions.pureProfileFromJson
@@ -236,6 +237,57 @@ class ProfilePlugin @Inject constructor(
         }
         isEdited = false
         createAndStoreConvertedProfile()
+        // Watch patch: keep local profiles aligned with the global units preference,
+        // so switching mmol/l <-> mg/dl also migrates the stored glucose targets.
+        syncUnitsWithGlobalPreference()
+    }
+
+    /**
+     * Watch patch: migrate every local profile's glucose targets (target_low/target_high)
+     * to the unit currently selected in General settings. Upstream renders the profile
+     * editor in the profile's own stored unit, so after a global unit change the editor
+     * looked "not linked". This converts the numeric values (same physiological targets)
+     * and flips each profile's unit flag, then persists.
+     *
+     * @param newMgdl target unit: true = mg/dl, false = mmol/l
+     */
+    @Synchronized
+    fun migrateProfilesToUnit(newMgdl: Boolean) {
+        var changed = false
+        for (p in profiles) {
+            if (p.mgdl == newMgdl) continue
+            p.mgdl = newMgdl
+            p.targetLow = convertTargetArrayUnit(p.targetLow, newMgdl)
+            p.targetHigh = convertTargetArrayUnit(p.targetHigh, newMgdl)
+            changed = true
+        }
+        if (changed) {
+            aapsLogger.debug(LTag.PROFILE, "Migrated local profiles to " + if (newMgdl) "mg/dl" else "mmol/l")
+            storeSettings(timestamp = dateUtil.now())
+        }
+    }
+
+    /**
+     * Watch patch: migrate all local profiles to the unit stored in the global
+     * GeneralUnits preference (called on every loadSettings and on units change).
+     */
+    @Synchronized
+    fun syncUnitsWithGlobalPreference() {
+        val globalUnits = preferences.get(StringKey.GeneralUnits)
+        val newMgdl = GlucoseUnit.fromText(globalUnits) == GlucoseUnit.MGDL
+        migrateProfilesToUnit(newMgdl)
+    }
+
+    private fun convertTargetArrayUnit(arr: JSONArray, toMgdl: Boolean): JSONArray {
+        val factor = if (toMgdl) GlucoseUnit.MMOLL_TO_MGDL else GlucoseUnit.MGDL_TO_MMOLL
+        for (i in 0 until arr.length()) {
+            val o = arr.getJSONObject(i)
+            if (o.has("value")) {
+                val rounded = Math.round(o.getDouble("value") * factor * 10.0) / 10.0
+                o.put("value", rounded)
+            }
+        }
+        return arr
     }
 
     @Synchronized

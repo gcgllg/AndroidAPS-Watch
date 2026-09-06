@@ -77,6 +77,7 @@ class MyPreferenceFragment : PreferenceFragmentCompat(), OnSharedPreferenceChang
     @Inject lateinit var maintenancePlugin: MaintenancePlugin
     @Inject lateinit var skinProvider: SkinProvider
     @Inject lateinit var overview: Overview
+    @Inject lateinit var profilePlugin: app.aaps.plugins.main.profile.ProfilePlugin
 
     companion object {
 
@@ -176,6 +177,11 @@ class MyPreferenceFragment : PreferenceFragmentCompat(), OnSharedPreferenceChang
             rxBus.send(EventRebuildTabs())
         }
         if (key == StringKey.GeneralUnits.key || key == BooleanKey.GeneralSimpleMode.key || preferences.getDependingOn(key).isNotEmpty()) {
+            if (key == StringKey.GeneralUnits.key) {
+                // Watch patch: migrate local profile glucose targets to the newly selected unit
+                // before the UI is rebuilt, so profile editor & targets follow the global unit.
+                profilePlugin.syncUnitsWithGlobalPreference()
+            }
             activity?.recreate()
             return
         }

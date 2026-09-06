@@ -22,6 +22,8 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.text.toSpanned
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.aaps.core.data.configuration.Constants
 import app.aaps.core.data.model.GlucoseUnit
@@ -260,6 +262,30 @@ class OverviewFragment : DaggerFragment(), View.OnClickListener, OnLongClickList
         binding.buttonsLayout.quickWizardButton.setOnLongClickListener(this)
         binding.infoLayout.apsMode.setOnClickListener(this)
         binding.infoLayout.apsMode.setOnLongClickListener(this)
+
+        // Watch: hide bottom buttons while an edit dialog overlays the overview
+        // so the 4 fixed buttons don't visually clash with the dialog content.
+        childFragmentManager.registerFragmentLifecycleCallbacks(object : FragmentManager.FragmentLifecycleCallbacks() {
+            override fun onFragmentStarted(fm: FragmentManager, f: androidx.fragment.app.Fragment) {
+                if (f is DialogFragment) updateOverviewButtonsForDialog(true)
+            }
+
+            override fun onFragmentStopped(fm: FragmentManager, f: androidx.fragment.app.Fragment) {
+                if (f is DialogFragment) updateOverviewButtonsForDialog(false)
+            }
+        }, true)
+    }
+
+    private fun updateOverviewButtonsForDialog(dialogOpen: Boolean) {
+        // Only apply on small (watch) layouts; phone screens are tall enough to coexist.
+        if (!smallHeight) return
+        if (!isAdded) return
+        val target = if (dialogOpen && anyDialogVisible()) View.GONE else View.VISIBLE
+        binding.buttonsLayout.root.visibility = target
+    }
+
+    private fun anyDialogVisible(): Boolean {
+        return childFragmentManager.fragments.any { it is DialogFragment && it.isVisible }
     }
 
     override fun onPause() {
