@@ -209,6 +209,8 @@ class NSClientV3Plugin @Inject constructor(
         handler = Handler(HandlerThread(this::class.simpleName + "Handler").also { it.start() }.looper)
 
         lastLoadedSrvModified = Json.decodeFromString(preferences.get(NsclientStringKey.V3LastModified))
+        // WATCH PATCH: force profile store re-fetch at every start (NS is source of truth on watch)
+        lastLoadedSrvModified.collections.profile = 0L
 
         setClient()
 
