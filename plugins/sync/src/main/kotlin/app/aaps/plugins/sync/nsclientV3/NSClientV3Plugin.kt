@@ -782,10 +782,11 @@ class NSClientV3Plugin @Inject constructor(
                 OneTimeWorkRequest.Builder(LoadStatusWorker::class.java).build()
             )
             .then(OneTimeWorkRequest.Builder(LoadLastModificationWorker::class.java).build())
+            // WATCH PATCH: profile store first - BG/treatments stall the chain and it gets REPLACEd
+            .then(OneTimeWorkRequest.Builder(LoadProfileStoreWorker::class.java).build())
             .then(OneTimeWorkRequest.Builder(LoadBgWorker::class.java).build())
             .then(OneTimeWorkRequest.Builder(LoadTreatmentsWorker::class.java).build())
             .then(OneTimeWorkRequest.Builder(LoadFoodsWorker::class.java).build())
-            .then(OneTimeWorkRequest.Builder(LoadProfileStoreWorker::class.java).build())
             .then(OneTimeWorkRequest.Builder(LoadDeviceStatusWorker::class.java).build())
             .then(OneTimeWorkRequest.Builder(DataSyncWorker::class.java).build())
             .enqueue()
