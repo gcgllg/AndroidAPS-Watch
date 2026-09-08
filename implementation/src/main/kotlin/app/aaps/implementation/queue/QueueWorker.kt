@@ -1,5 +1,6 @@
 package app.aaps.implementation.queue
 
+import android.os.Build
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.os.PowerManager
@@ -60,7 +61,7 @@ class QueueWorker internal constructor(
                 val pump = activePlugin.activePump
                 //  Manifest.permission.BLUETOOTH_CONNECT
                 if (config.PUMPDRIVERS && pump !is VirtualPump)
-                    if (androidPermission.permissionNotGranted(context, "android.permission.BLUETOOTH_CONNECT") || androidPermission.permissionNotGranted(context, "android.permission.BLUETOOTH_SCAN")) {
+                    if (Build.VERSION.SDK_INT >= 31 && (androidPermission.permissionNotGranted(context, "android.permission.BLUETOOTH_CONNECT") || androidPermission.permissionNotGranted(context, "android.permission.BLUETOOTH_SCAN"))) {
                         ToastUtils.errorToast(context, R.string.need_connect_permission)
                         aapsLogger.debug(LTag.PUMPQUEUE, "no permission")
                         rxBus.send(EventPumpStatusChanged(EventPumpStatusChanged.Status.CONNECTING))

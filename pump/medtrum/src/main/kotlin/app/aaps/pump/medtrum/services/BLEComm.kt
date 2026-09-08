@@ -1,5 +1,6 @@
 package app.aaps.pump.medtrum.services
 
+import android.os.Build
 import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
@@ -93,7 +94,7 @@ class BLEComm @Inject internal constructor(
     @SuppressLint("MissingPermission")
     @Synchronized
     fun startScan(): Boolean {
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+        if (Build.VERSION.SDK_INT >= 31 && ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
             ToastUtils.errorToast(context, context.getString(app.aaps.core.ui.R.string.need_connect_permission))
             aapsLogger.error(LTag.PUMPBTCOMM, "missing permissions")
             return false
@@ -120,9 +121,9 @@ class BLEComm @Inject internal constructor(
 
     @Synchronized
     fun connect(from: String, deviceSN: Long): Boolean {
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED ||
+        if (Build.VERSION.SDK_INT >= 31 && (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED ||
             ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED
-        ) {
+        )) {
             ToastUtils.errorToast(context, context.getString(app.aaps.core.ui.R.string.need_connect_permission))
             aapsLogger.error(LTag.PUMPBTCOMM, "missing permission: $from")
             return false
@@ -171,7 +172,7 @@ class BLEComm @Inject internal constructor(
     @SuppressLint("MissingPermission")
     @Synchronized
     fun disconnect(from: String) {
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+        if (Build.VERSION.SDK_INT >= 31 && ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
             aapsLogger.error(LTag.PUMPBTCOMM, "missing permission: $from")
             return
         }

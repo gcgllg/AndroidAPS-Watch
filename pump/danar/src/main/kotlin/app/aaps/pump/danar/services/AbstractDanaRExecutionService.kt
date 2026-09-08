@@ -1,5 +1,6 @@
 package app.aaps.pump.danar.services
 
+import android.os.Build
 import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothManager
@@ -191,7 +192,7 @@ abstract class AbstractDanaRExecutionService : DaggerService() {
 
     fun getBTSocketForSelectedPump() {
         val deviceName = preferences.get(DanaStringKey.RName)
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
+        if (Build.VERSION.SDK_INT < 31 || ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
             (context.getSystemService(BLUETOOTH_SERVICE) as BluetoothManager).adapter
                 ?.bondedDevices?.firstOrNull { it.name == deviceName }?.let { mBTDevice ->
                     try {

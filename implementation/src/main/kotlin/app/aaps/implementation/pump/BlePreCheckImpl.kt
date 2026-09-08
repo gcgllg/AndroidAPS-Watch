@@ -1,5 +1,6 @@
 package app.aaps.implementation.pump
 
+import android.os.Build
 import android.Manifest
 import android.bluetooth.BluetoothManager
 import android.content.Context
@@ -35,9 +36,10 @@ class BlePreCheckImpl @Inject constructor(
             OKDialog.show(activity, rh.gs(app.aaps.core.ui.R.string.message), rh.gs(app.aaps.core.ui.R.string.ble_not_supported))
             return false
         } else {
-            if (ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED ||
+            if (Build.VERSION.SDK_INT >= 31 && (
+                ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED
-            ) {
+            )) {
                 ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT), PERMISSION_REQUEST_BLUETOOTH)
                 return false
             }

@@ -1,5 +1,6 @@
 package app.aaps.plugins.configuration.maintenance
 
+import android.os.Build
 import android.Manifest
 import android.bluetooth.BluetoothManager
 import android.content.Context
@@ -165,7 +166,7 @@ class ImportExportPrefsImpl @Inject constructor(
         // based on https://medium.com/@pribble88/how-to-get-an-android-device-nickname-4b4700b3068c
         val n1 = Settings.System.getString(context.contentResolver, "bluetooth_name")
         val n3 = try {
-            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT < 31 || ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
                 (context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager?)?.adapter?.name
             } else null
         } catch (_: Exception) {

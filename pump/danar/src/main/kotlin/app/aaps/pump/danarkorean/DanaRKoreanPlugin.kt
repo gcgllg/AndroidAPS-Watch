@@ -1,5 +1,6 @@
 package app.aaps.pump.danarkorean
 
+import android.os.Build
 import android.Manifest
 import android.bluetooth.BluetoothManager
 import android.content.ComponentName
@@ -341,7 +342,7 @@ class DanaRKoreanPlugin @Inject constructor(
         if (requiredKey != null) return
 
         var entries = emptyArray<CharSequence>()
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
+        if (Build.VERSION.SDK_INT < 31 || ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
             val devices = Vector<CharSequence>()
             (context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager?)?.adapter?.let { bta ->
                 for (dev in bta.bondedDevices)

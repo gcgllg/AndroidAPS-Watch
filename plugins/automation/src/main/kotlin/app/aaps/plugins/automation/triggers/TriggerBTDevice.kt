@@ -1,5 +1,6 @@
 package app.aaps.plugins.automation.triggers
 
+import android.os.Build
 import android.Manifest
 import android.bluetooth.BluetoothManager
 import android.content.Context
@@ -77,7 +78,7 @@ class TriggerBTDevice(injector: HasAndroidInjector) : Trigger(injector) {
     // Get the list of paired BT devices to use in dropdown menu
     private fun devicesPaired(): ArrayList<CharSequence> {
         val s = ArrayList<CharSequence>()
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
+        if (Build.VERSION.SDK_INT < 31 || ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
             (context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager?)?.adapter?.bondedDevices?.forEach { s.add(it.name) }
         } else {
             ToastUtils.errorToast(context, context.getString(app.aaps.core.ui.R.string.need_connect_permission))

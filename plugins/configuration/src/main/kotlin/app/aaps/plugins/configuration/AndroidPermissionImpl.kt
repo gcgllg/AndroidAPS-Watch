@@ -1,5 +1,6 @@
 package app.aaps.plugins.configuration
 
+import android.os.Build
 import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
@@ -120,14 +121,14 @@ class AndroidPermissionImpl @Inject constructor(
     override fun notifyForBtConnectPermission(activity: FragmentActivity) {
         if (activePlugin.activePump !is VirtualPump)
         //  Manifest.permission.BLUETOOTH_CONNECT
-            if (permissionNotGranted(activity, Manifest.permission.BLUETOOTH_CONNECT) || permissionNotGranted(activity, Manifest.permission.BLUETOOTH_SCAN))
+            if (Build.VERSION.SDK_INT >= 31 && (permissionNotGranted(activity, Manifest.permission.BLUETOOTH_CONNECT) || permissionNotGranted(activity, Manifest.permission.BLUETOOTH_SCAN)))
                 uiInteraction.addNotification(
                     id = Notification.PERMISSION_BT,
                     text = rh.gs(app.aaps.core.ui.R.string.need_connect_permission),
                     level = Notification.URGENT,
                     actionButtonId = R.string.request,
                     action = { askForPermission(activity, arrayOf(Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT)) },
-                    validityCheck = { permissionNotGranted(activity, Manifest.permission.BLUETOOTH_CONNECT) || permissionNotGranted(activity, Manifest.permission.BLUETOOTH_SCAN) }
+                    validityCheck = { Build.VERSION.SDK_INT < 31 || permissionNotGranted(activity, Manifest.permission.BLUETOOTH_CONNECT) || permissionNotGranted(activity, Manifest.permission.BLUETOOTH_SCAN) }
                 )
             else {
                 activity.startActivity(Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE))

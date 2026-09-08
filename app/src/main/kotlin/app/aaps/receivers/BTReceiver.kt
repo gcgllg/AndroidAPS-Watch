@@ -1,5 +1,6 @@
 package app.aaps.receivers
 
+import android.os.Build
 import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice
@@ -28,7 +29,7 @@ class BTReceiver : DaggerBroadcastReceiver() {
     fun processIntent(context: Context, intent: Intent) {
         val device = intent.safeGetParcelableExtra(BluetoothDevice.EXTRA_DEVICE, BluetoothDevice::class.java) ?: return
 
-        if (!androidPermission.permissionNotGranted(context, Manifest.permission.BLUETOOTH_CONNECT)) {
+        if (Build.VERSION.SDK_INT < 31 || !androidPermission.permissionNotGranted(context, Manifest.permission.BLUETOOTH_CONNECT)) {
             when (intent.action) {
                 BluetoothDevice.ACTION_ACL_CONNECTED    ->
                     rxBus.send(EventBTChange(EventBTChange.Change.CONNECT, deviceName = device.name, deviceAddress = device.address))
