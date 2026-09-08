@@ -36,6 +36,7 @@ import app.aaps.core.interfaces.rx.bus.RxBus
 import app.aaps.core.interfaces.rx.events.EventAppExit
 import app.aaps.core.interfaces.rx.events.EventDeviceStatusChange
 import app.aaps.core.interfaces.rx.events.EventNSClientNewLog
+import app.aaps.core.interfaces.rx.events.EventNSClientRestart
 import app.aaps.core.interfaces.rx.events.EventNewHistoryData
 import app.aaps.core.interfaces.rx.events.EventPreferenceChange
 import app.aaps.core.interfaces.rx.events.EventProfileStoreChanged
@@ -209,12 +210,19 @@ class NSClientV3Plugin @Inject constructor(
         handler = Handler(HandlerThread(this::class.simpleName + "Handler").also { it.start() }.looper)
 
         lastLoadedSrvModified = Json.decodeFromString(preferences.get(NsclientStringKey.V3LastModified))
-        // WATCH PATCH: force profile store re-fetch at every start (NS is source of truth on watch)
-        lastLoadedSrvModified.collections.profile = 0L
 
         setClient()
 
         receiverDelegate.grabReceiversState()
+        // WATCH PATCH: manual restart from NSClient screen => refetch NS profile store
+        disposable += rxBus
+            .toObservable(EventNSClientRestart::class.java)
+            .observeOn(aapsSchedulers.io)
+            .subscribe({
+                           resetToFullSync()
+                           executeLoop("RESTART", forceNew = true)
+                       }, fabricPrivacy::logException)
+
         disposable += rxBus
             .toObservable(EventAppExit::class.java)
             .observeOn(aapsSchedulers.io)

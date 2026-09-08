@@ -286,7 +286,7 @@ class NsIncomingDataProcessor @Inject constructor(
             val createdAt = store.getStartDate()
             val lastLocalChange = preferences.get(LongNonKey.LocalProfileLastChange)
             aapsLogger.debug(LTag.PROFILE, "Received profileStore: createdAt: $createdAt Local last modification: $lastLocalChange")
-            if (doFullSync || createdAt > lastLocalChange || createdAt % 1000 == 0L || preferences.get(BooleanKey.NsClientAcceptProfileStore)) { // WATCH PATCH: accept-profile ON => NS always wins on watch
+            if (doFullSync || createdAt > lastLocalChange || createdAt % 1000 == 0L) { // WATCH PATCH: manual full sync / restart overrides local timestamp
                 profileSource.loadFromStore(store)
                 activePlugin.activeNsClient?.dataSyncSelector?.profileReceived(store.getStartDate())
                 aapsLogger.debug(LTag.PROFILE, "Received profileStore: $profileJson")
