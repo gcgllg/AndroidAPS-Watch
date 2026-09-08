@@ -4,12 +4,15 @@ import android.os.Build
 import android.Manifest
 import android.bluetooth.BluetoothManager
 import android.content.ComponentName
+import android.os.Handler
+import android.os.Looper
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.content.pm.PackageManager
 import android.os.IBinder
 import androidx.core.app.ActivityCompat
+import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceManager
 import androidx.preference.PreferenceScreen
@@ -49,6 +52,7 @@ import app.aaps.pump.dana.database.DanaHistoryDatabase
 import app.aaps.pump.dana.keys.DanaBooleanKey
 import app.aaps.pump.dana.keys.DanaIntKey
 import app.aaps.pump.dana.keys.DanaStringKey
+import app.aaps.pump.danar.WatchBtPairHelper
 import app.aaps.pump.danar.AbstractDanaRPlugin
 import app.aaps.pump.danarkorean.services.DanaRKoreanExecutionService
 import io.reactivex.rxjava3.kotlin.plusAssign
@@ -367,6 +371,48 @@ class DanaRKoreanPlugin @Inject constructor(
                     entryValues = entries
                 )
             )
+            // WATCH PATCH begin: watch BT settings never shows the PIN dialog -> pair here
+            addPreference(
+                Preference(context).apply {
+                    title = "\u626b\u63cf\u914d\u5bf9\u6cf5 (PIN 0000)"
+                    summary = "watch shows no PIN dialog, pair from here"
+                    setOnPreferenceClickListener {
+                        val main = Handler(Looper.getMainLooper())
+                        fun toast(msg: String) = main.post { ToastUtils.infoToast(context, msg) }
+                        toast("Scanning for devices...")
+                        Thread {
+                            try {
+                                val found = WatchBtPairHelper.scan(context)
+                                if (found.isEmpty()) {
+                                    main.post { ToastUtils.errorToast(context, "No device found - re-enter Discovery on pump") }
+                                } else {
+                                    val names = found.map { it.name }.toTypedArray()
+                                    main.post {
+                                        android.app.AlertDialog.Builder(context)
+                                            .setTitle("Select pump")
+                                            .setItems(names) { _, which ->
+                                                toast("Pairing " + names[which] + " ...")
+                                                Thread {
+                                                    val ok = WatchBtPairHelper.bond(context, found[which], "0000")
+                                                    main.post {
+                                                        if (ok) ToastUtils.okToast(context, "Paired OK")
+                                                        else ToastUtils.errorToast(context, "Pairing failed")
+                                                    }
+                                                }.start()
+                                            }
+                                            .show()
+                                    }
+                                }
+                            } catch (e: Exception) {
+                                main.post { ToastUtils.errorToast(context, "Scan failed: " + e.message) }
+                            }
+                        }.start()
+                        true
+                    }
+                }
+            )
+            // WATCH PATCH end
+
             addPreference(
                 AdaptiveIntPreference(
                     ctx = context, intKey = DanaIntKey.Password, title = app.aaps.pump.dana.R.string.danar_password_title,
